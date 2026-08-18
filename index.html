@@ -1,9 +1,119 @@
-<h1>My website on github</h1>
-<p>Welcome to my personal website hosted on GitHub Pages. Here you can find information about my projects, blog posts, and contact details.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jordan Rivera — Software Developer</title>
+<meta name="description" content="Portfolio of Jordan Rivera, a software developer building web apps, tools, and APIs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<h2>Projects</h2>
-<ul>
-    <li>First Project: A web application for managing tasks.</li>
-    <li>Second Project: A mobile app for tracking fitness activities.</li>    
-    <li>Third Project: A machine learning model for predicting stock prices.</li>
-</ul>
+<header class="site-header">
+  <nav>
+    <div class="logo">jordan<span>.</span>dev</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">Hi, I'm Jordan</div>
+    <h1>I build <span class="accent">software</span><br>that feels effortless.</h1>
+    <p class="lead">Software developer focused on clean, reliable web applications — from backend APIs to the pixels users actually touch.</p>
+    <div class="btn-row">
+      <a class="btn primary" href="#projects">View my work</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About me</h2>
+    <p class="section-sub">A little about how I work and what I know.</p>
+    <div class="about-grid">
+      <div>
+        <p>I'm a software developer who enjoys turning ambiguous problems into simple, working products. I care about readable code, fast feedback loops, and shipping things that hold up in the real world.</p>
+        <p>Outside of client and personal projects, I like exploring new tools, contributing to open source, and writing about what I learn along the way.</p>
+      </div>
+      <div>
+        <ul class="skills-list">
+          <li>JavaScript / TypeScript</li>
+          <li>Python</li>
+          <li>React</li>
+          <li>Node.js</li>
+          <li>REST &amp; GraphQL APIs</li>
+          <li>SQL &amp; PostgreSQL</li>
+          <li>Docker</li>
+          <li>Git &amp; CI/CD</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <p class="section-sub">A few things I've built recently.</p>
+    <div class="project-grid">
+
+      <div class="card">
+        <span class="tag">Web App</span>
+        <h3>Taskflow</h3>
+        <p>A lightweight task manager with real-time sync, keyboard shortcuts, and a focus on speed over clutter.</p>
+        <div class="tech"><span>React</span><span>Node.js</span><span>PostgreSQL</span></div>
+        <div class="links">
+          <a href="#">Live demo →</a>
+          <a href="#">Source</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Mobile</span>
+        <h3>Pace</h3>
+        <p>A fitness tracking app that turns daily activity into simple, motivating trends instead of noisy charts.</p>
+        <div class="tech"><span>React Native</span><span>Firebase</span></div>
+        <div class="links">
+          <a href="#">Case study →</a>
+          <a href="#">Source</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Machine Learning</span>
+        <h3>Signal</h3>
+        <p>An experimental model for forecasting short-term stock price movement using historical market data.</p>
+        <div class="tech"><span>Python</span><span>scikit-learn</span><span>Pandas</span></div>
+        <div class="links">
+          <a href="#">Write-up →</a>
+          <a href="#">Source</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Let's talk</h2>
+    <p class="section-sub">Have a project in mind, or just want to say hi? I'm always happy to hear from people.</p>
+    <div class="contact-links">
+      <a href="mailto:hello@example.com">Email</a>
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Jordan Rivera. Built with HTML &amp; CSS, hosted on GitHub Pages.</p>
+</footer>
+
+</body>
+</html>
