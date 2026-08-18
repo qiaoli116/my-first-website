@@ -416,3 +416,57 @@ code {
 @media (max-width: 720px) {
   .callout-grid { grid-template-columns: 1fr; }
 }
+
+/* Tutorial page layout with right-side table of contents */
+.tutorial-layout {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 56px;
+  align-items: start;
+}
+
+.toc {
+  position: sticky;
+  top: 96px;
+}
+
+.toc-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+}
+
+.toc nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 1px solid var(--border);
+}
+
+.toc nav a {
+  color: var(--text-dim);
+  font-size: 0.86rem;
+  line-height: 1.4;
+  padding: 7px 0 7px 16px;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+}
+
+.toc nav a:hover { color: var(--text); text-decoration: none; }
+
+.toc nav a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .tutorial-layout { grid-template-columns: 1fr; }
+  .toc { display: none; }
+}

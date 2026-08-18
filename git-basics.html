@@ -33,6 +33,11 @@
     <p class="lead">Git is the most popular version control system — free, open source, and the thing every cloud platform like GitHub or GitLab is built around. Here's the mental model: what a repository actually is, how branches and merges work, how your machine talks to a server, and how a team shares all of it without stepping on each other.</p>
   </section>
 
+</main>
+
+<div class="tutorial-layout">
+  <div class="tutorial-content">
+
   <section id="local-repo">
     <h2>1. Your local repository</h2>
     <p class="section-sub">A repository is just a folder Git is keeping a history of. Every commit is a saved snapshot; a branch is a separate line of snapshots you can work on without touching anything else.</p>
@@ -152,9 +157,11 @@
       </svg>
     </div>
     <p class="diagram-caption">Both histories end up identical after a sync — GitHub is just another copy of the same repository, reachable over the network instead of sitting on your disk.</p>
+  </section>
 
-    <h3 style="margin: 44px 0 6px; font-size: 1.1rem;">Tools you'll actually use</h3>
-    <p class="section-sub" style="margin-bottom:14px;">Four things cover almost everything above.</p>
+  <section id="tools">
+    <h2>3. Tools you need</h2>
+    <p class="section-sub">Four things cover almost everything above.</p>
     <ul class="tools-list">
       <li><strong>GitHub account</strong><span>Where your remote repositories live, and how a team shares one.</span></li>
       <li><strong>GitHub Desktop</strong><span>A visual way to commit, branch, and push/fetch without memorizing commands. The command-line <code>git</code> does the same thing.</span></li>
@@ -164,7 +171,7 @@
   </section>
 
   <section id="team">
-    <h2>3. Working as a team</h2>
+    <h2>4. Working as a team</h2>
     <p class="section-sub">A team shares one remote repository. Everyone follows the same branch → commit → merge pattern from part 1 — just against a repo other people are also pushing to.</p>
 
     <p>Each person clones the shared repo, creates their own branch for whatever they're working on, commits to it freely, then merges it back in once it's ready — usually through a <strong>pull request</strong> so someone else can review the change before it lands.</p>
@@ -246,11 +253,49 @@
     </dl>
   </section>
 
-</main>
+  </div>
+
+  <aside class="toc">
+    <div class="toc-inner">
+      <span class="toc-label">On this page</span>
+      <nav>
+        <a href="#local-repo">1. Your local repository</a>
+        <a href="#remote">2. Syncing with a remote</a>
+        <a href="#tools">3. Tools you need</a>
+        <a href="#team">4. Working as a team</a>
+        <a href="#glossary">Quick glossary</a>
+      </nav>
+    </div>
+  </aside>
+
+</div>
 
 <footer>
   <p>&copy; 2026 Jordan Rivera. Built with HTML &amp; CSS, hosted on GitHub Pages.</p>
 </footer>
+
+<script>
+  (function () {
+    var links = document.querySelectorAll('.toc nav a');
+    var sections = Array.prototype.map.call(links, function (a) {
+      return document.querySelector(a.getAttribute('href'));
+    });
+
+    function onScroll() {
+      var pos = window.scrollY + 140;
+      var current = sections[0];
+      sections.forEach(function (sec) {
+        if (sec && sec.offsetTop <= pos) current = sec;
+      });
+      links.forEach(function (a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+      });
+    }
+
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 
 </body>
 </html>
