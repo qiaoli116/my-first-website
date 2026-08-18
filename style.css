@@ -261,6 +261,40 @@ footer {
 /* Nav active state */
 nav a.active { color: var(--text); }
 
+/* Promo banner */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  background: linear-gradient(120deg, rgba(110, 231, 208, 0.09), rgba(124, 143, 255, 0.09));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 34px 38px;
+  margin: 0 0 20px;
+}
+
+.banner .banner-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #0b0e14;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  padding: 4px 11px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.banner h2 { margin: 0 0 8px; font-size: 1.35rem; letter-spacing: -0.02em; }
+.banner p { margin: 0; color: var(--text-dim); font-size: 0.98rem; max-width: 480px; }
+.banner .btn { flex: none; }
+
+@media (max-width: 720px) {
+  .banner { flex-direction: column; align-items: flex-start; padding: 28px; }
+}
+
 /* Sub-page hero (tutorials, articles) */
 .page-hero { padding: 90px 0 40px; }
 .page-hero h1 {
