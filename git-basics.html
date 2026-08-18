@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git &amp; GitHub, Visually — Jordan Rivera</title>
+<meta name="description" content="A visual walkthrough of version control: commits, branches, merges, and how a local repository syncs with GitHub.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav>
+    <div class="logo">jordan<span>.</span>dev</div>
+    <ul>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#projects">Projects</a></li>
+      <li><a href="git-basics.html" class="active">Git Tutorial</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <section class="page-hero">
+    <a class="back-link" href="index.html">&larr; Back home</a>
+    <div class="eyebrow" style="margin-top:22px;">Notes for a student</div>
+    <h1>Git &amp; GitHub, <span class="accent">visually</span></h1>
+    <p class="lead">Git is the most popular version control system — free, open source, and the thing every cloud platform like GitHub or GitLab is built around. Here's the mental model: what a repository actually is, how branches and merges work, how your machine talks to a server, and how a team shares all of it without stepping on each other.</p>
+  </section>
+
+  <section id="local-repo">
+    <h2>1. Your local repository</h2>
+    <p class="section-sub">A repository is just a folder Git is keeping a history of. Every commit is a saved snapshot; a branch is a separate line of snapshots you can work on without touching anything else.</p>
+
+    <p>Running <code>git init</code> creates the very first commit — the root of everything that follows. From there, every <code>git commit</code> adds a new snapshot on top of the last one. That's already version control: a timeline of versions you can always come back to.</p>
+    <p>A <strong>branch</strong> lets you split off from that timeline to try something without disturbing it. If it works out, you <strong>merge</strong> it back in — folding those commits into the branch you started from. If it doesn't, you just abandon the branch and nothing else is affected.</p>
+
+    <div class="diagram-panel">
+      <svg viewBox="0 0 620 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of a local repository: an init commit, a short exploration branch that merges back into main, then a production line with a private dev branch that merges back in once it's ready.">
+        <defs>
+          <marker id="arrowMain" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#cfd3dc"></path>
+          </marker>
+          <marker id="arrowCoral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--coral)"></path>
+          </marker>
+          <marker id="arrowViolet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"></path>
+          </marker>
+        </defs>
+
+        <!-- main line -->
+        <line x1="90" y1="40" x2="90" y2="430" stroke="#cfd3dc" stroke-width="3"></line>
+        <line x1="90" y1="430" x2="90" y2="452" stroke="#cfd3dc" stroke-width="3" marker-end="url(#arrowMain)"></line>
+
+        <!-- red exploration branch -->
+        <path d="M90,60 C150,60 150,60 220,60" stroke="var(--coral)" stroke-width="3" fill="none"></path>
+        <line x1="220" y1="60" x2="220" y2="175" stroke="var(--coral)" stroke-width="3"></line>
+        <path d="M220,175 C150,175 150,205 90,205" stroke="var(--coral)" stroke-width="3" fill="none" marker-end="url(#arrowCoral)"></path>
+
+        <circle cx="220" cy="90" r="9" fill="#151a24" stroke="var(--coral)" stroke-width="3"></circle>
+        <circle cx="220" cy="130" r="9" fill="#151a24" stroke="var(--coral)" stroke-width="3"></circle>
+        <circle cx="220" cy="175" r="9" fill="#151a24" stroke="var(--coral)" stroke-width="3"></circle>
+        <text x="220" y="45" text-anchor="middle" fill="var(--coral)" font-size="13" font-weight="600">exploration branch</text>
+
+        <!-- blue dev branch -->
+        <path d="M90,270 C150,270 150,270 220,270" stroke="var(--accent-2)" stroke-width="3" fill="none"></path>
+        <line x1="220" y1="270" x2="220" y2="365" stroke="var(--accent-2)" stroke-width="3"></line>
+        <path d="M220,365 C150,365 150,395 90,395" stroke="var(--accent-2)" stroke-width="3" fill="none" marker-end="url(#arrowViolet)"></path>
+
+        <circle cx="220" cy="300" r="9" fill="#151a24" stroke="var(--accent-2)" stroke-width="3"></circle>
+        <circle cx="220" cy="330" r="9" fill="#151a24" stroke="var(--accent-2)" stroke-width="3"></circle>
+        <circle cx="220" cy="365" r="9" fill="#151a24" stroke="var(--accent-2)" stroke-width="3"></circle>
+        <text x="220" y="255" text-anchor="middle" fill="var(--accent-2)" font-size="13" font-weight="600">private dev branch</text>
+        <text x="240" y="320" fill="var(--text-dim)" font-size="12">tests pass →</text>
+        <text x="240" y="336" fill="var(--text-dim)" font-size="12">ready to merge</text>
+
+        <!-- main nodes -->
+        <circle cx="90" cy="40" r="10" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <text x="70" y="30" text-anchor="end" fill="var(--text)" font-size="13" font-weight="600">init</text>
+
+        <circle cx="90" cy="205" r="10" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <text x="70" y="209" text-anchor="end" fill="var(--text-dim)" font-size="12">merge</text>
+
+        <circle cx="90" cy="245" r="11" fill="var(--accent)" stroke="var(--accent)" stroke-width="3"></circle>
+        <text x="70" y="249" text-anchor="end" fill="var(--accent)" font-size="13" font-weight="600">production</text>
+
+        <circle cx="90" cy="395" r="10" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <text x="70" y="399" text-anchor="end" fill="var(--text-dim)" font-size="12">merge</text>
+
+        <text x="105" y="458" fill="var(--text-dim)" font-size="12">HEAD</text>
+      </svg>
+    </div>
+    <p class="diagram-caption">The exploration branch is thrown away conceptually the moment it merges back — it existed just to try something safely. The dev branch follows the same pattern: branch off <code>production</code>, commit freely, merge back only once it's tested.</p>
+
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:#e7e9ee"></span> main / production</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--coral)"></span> short-lived exploration branch</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--accent-2)"></span> private dev branch</span>
+    </div>
+  </section>
+
+  <section id="remote">
+    <h2>2. Syncing with a remote — GitHub</h2>
+    <p class="section-sub">Git itself doesn't need a server — but a cloud platform like GitHub or GitLab hosts a copy of your repository so it can be backed up, shared, and worked on from anywhere.</p>
+
+    <p>The repository on GitHub has the exact same shape as the one on your machine — same commits, same branches. Two commands keep them in sync:</p>
+    <ul class="skills-list" style="margin: 18px 0 0;">
+      <li><code>clone</code> / <code>fetch</code> — pull the server's history down to your machine</li>
+      <li><code>push</code> — send your local commits up to the server</li>
+    </ul>
+
+    <div class="diagram-panel">
+      <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram showing a local repository and a GitHub repository, with a fetch arrow pulling from the server to local, and a push arrow sending from local to the server.">
+        <defs>
+          <marker id="arrowFetch" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"></path>
+          </marker>
+          <marker id="arrowPush" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"></path>
+          </marker>
+        </defs>
+
+        <!-- local -->
+        <text x="140" y="28" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="700">your computer</text>
+        <line x1="140" y1="50" x2="140" y2="250" stroke="#cfd3dc" stroke-width="3"></line>
+        <circle cx="140" cy="60" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <circle cx="140" cy="130" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <circle cx="140" cy="200" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <circle cx="140" cy="245" r="9" fill="var(--accent)" stroke="var(--accent)" stroke-width="3"></circle>
+
+        <!-- server -->
+        <text x="500" y="28" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="700">GitHub (remote)</text>
+        <line x1="500" y1="50" x2="500" y2="250" stroke="#cfd3dc" stroke-width="3"></line>
+        <circle cx="500" cy="60" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <circle cx="500" cy="130" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <circle cx="500" cy="200" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+        <circle cx="500" cy="245" r="9" fill="var(--accent)" stroke="var(--accent)" stroke-width="3"></circle>
+
+        <!-- fetch arrow: server -> local -->
+        <line x1="470" y1="100" x2="175" y2="100" stroke="var(--accent-2)" stroke-width="3" marker-end="url(#arrowFetch)"></line>
+        <text x="320" y="88" text-anchor="middle" fill="var(--accent-2)" font-size="13" font-weight="600">clone / fetch</text>
+
+        <!-- push arrow: local -> server -->
+        <line x1="170" y1="180" x2="465" y2="180" stroke="var(--accent)" stroke-width="3" marker-end="url(#arrowPush)"></line>
+        <text x="320" y="200" text-anchor="middle" fill="var(--accent)" font-size="13" font-weight="600">push</text>
+      </svg>
+    </div>
+    <p class="diagram-caption">Both histories end up identical after a sync — GitHub is just another copy of the same repository, reachable over the network instead of sitting on your disk.</p>
+
+    <h3 style="margin: 44px 0 6px; font-size: 1.1rem;">Tools you'll actually use</h3>
+    <p class="section-sub" style="margin-bottom:14px;">Three things cover almost everything above.</p>
+    <ul class="tools-list">
+      <li><strong>GitHub account</strong><span>Where your remote repositories live, and how a team shares one.</span></li>
+      <li><strong>GitHub Desktop</strong><span>A visual way to commit, branch, and push/fetch without memorizing commands. The command-line <code>git</code> does the same thing.</span></li>
+      <li><strong>An IDE — Visual Studio Code</strong><span>Where you actually edit the files; most editors have Git built in or via extension.</span></li>
+    </ul>
+  </section>
+
+  <section id="team">
+    <h2>3. Working as a team</h2>
+    <p class="section-sub">A team shares one remote repository. Everyone follows the same branch → commit → merge pattern from part 1 — just against a repo other people are also pushing to.</p>
+
+    <p>Each person clones the shared repo, creates their own branch for whatever they're working on, commits to it freely, then merges it back in once it's ready — usually through a <strong>pull request</strong> so someone else can review the change before it lands.</p>
+
+    <div class="diagram-panel">
+      <svg viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of a shared repository with two teammates each branching off, committing, and merging back at different times.">
+        <defs>
+          <marker id="arrowV2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--accent-2)"></path>
+          </marker>
+          <marker id="arrowC2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--coral)"></path>
+          </marker>
+        </defs>
+
+        <text x="90" y="26" fill="var(--text)" font-size="13" font-weight="700">shared repository (GitHub)</text>
+        <line x1="90" y1="40" x2="90" y2="370" stroke="#cfd3dc" stroke-width="3"></line>
+        <line x1="90" y1="370" x2="90" y2="392" stroke="#cfd3dc" stroke-width="3" marker-end="url(#arrowMain)"></line>
+        <circle cx="90" cy="40" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+
+        <!-- teammate: you (violet) -->
+        <path d="M90,80 C150,80 150,80 210,80" stroke="var(--accent-2)" stroke-width="3" fill="none"></path>
+        <line x1="210" y1="80" x2="210" y2="150" stroke="var(--accent-2)" stroke-width="3"></line>
+        <path d="M210,150 C150,150 150,180 90,180" stroke="var(--accent-2)" stroke-width="3" fill="none" marker-end="url(#arrowV2)"></path>
+        <circle cx="210" cy="110" r="8" fill="#151a24" stroke="var(--accent-2)" stroke-width="3"></circle>
+        <circle cx="210" cy="150" r="8" fill="#151a24" stroke="var(--accent-2)" stroke-width="3"></circle>
+        <text x="210" y="66" text-anchor="middle" fill="var(--accent-2)" font-size="13" font-weight="600">you</text>
+        <circle cx="90" cy="180" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+
+        <!-- teammate: coral, later and overlapping -->
+        <path d="M90,220 C150,220 150,220 210,220" stroke="var(--coral)" stroke-width="3" fill="none"></path>
+        <line x1="210" y1="220" x2="210" y2="300" stroke="var(--coral)" stroke-width="3"></line>
+        <path d="M210,300 C150,300 150,330 90,330" stroke="var(--coral)" stroke-width="3" fill="none" marker-end="url(#arrowC2)"></path>
+        <circle cx="210" cy="250" r="8" fill="#151a24" stroke="var(--coral)" stroke-width="3"></circle>
+        <circle cx="210" cy="300" r="8" fill="#151a24" stroke="var(--coral)" stroke-width="3"></circle>
+        <text x="210" y="206" text-anchor="middle" fill="var(--coral)" font-size="13" font-weight="600">teammate</text>
+        <circle cx="90" cy="330" r="9" fill="#151a24" stroke="#e7e9ee" stroke-width="3"></circle>
+
+        <text x="240" y="115" fill="var(--text-dim)" font-size="12">own branch,</text>
+        <text x="240" y="131" fill="var(--text-dim)" font-size="12">own commits</text>
+        <text x="240" y="255" fill="var(--text-dim)" font-size="12">pull request</text>
+        <text x="240" y="271" fill="var(--text-dim)" font-size="12">→ review → merge</text>
+      </svg>
+    </div>
+    <p class="diagram-caption">Same shape as the local branch/merge diagram — just repeated once per person, all against the same shared history on GitHub.</p>
+
+    <div class="callout-grid">
+      <div class="callout">
+        <h3>⚠ What can go wrong</h3>
+        <ul>
+          <li><strong>Merge conflicts</strong> — two people edit the same lines; Git can't guess which version wins.</li>
+          <li>Someone pushes straight to <code>main</code>/production and breaks it for everyone.</li>
+          <li>A branch sits unmerged for so long it drifts far from <code>main</code>, making the eventual merge painful.</li>
+        </ul>
+      </div>
+      <div class="callout good">
+        <h3>✓ Good practice</h3>
+        <ul>
+          <li>Always branch off before making changes — never commit directly to <code>main</code>/production.</li>
+          <li>Open a pull request and get a review before merging.</li>
+          <li>Run tests before merging, and merge often so branches don't drift.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="glossary">
+    <h2>Quick glossary</h2>
+    <p class="section-sub">The handful of terms everything above is built from.</p>
+    <dl class="glossary-grid">
+      <div class="glossary-item"><dt>Repository</dt><dd>A folder plus its full commit history.</dd></div>
+      <div class="glossary-item"><dt>Commit</dt><dd>A saved snapshot of the project at a point in time.</dd></div>
+      <div class="glossary-item"><dt>Branch</dt><dd>An independent line of commits, split off to work without affecting others.</dd></div>
+      <div class="glossary-item"><dt>Merge</dt><dd>Folding one branch's commits back into another.</dd></div>
+      <div class="glossary-item"><dt>Remote</dt><dd>A copy of the repository hosted elsewhere — e.g. on GitHub.</dd></div>
+      <div class="glossary-item"><dt>Clone</dt><dd>Download a full copy of a remote repository for the first time.</dd></div>
+      <div class="glossary-item"><dt>Fetch</dt><dd>Pull down the latest history from the remote.</dd></div>
+      <div class="glossary-item"><dt>Push</dt><dd>Send your local commits up to the remote.</dd></div>
+    </dl>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Jordan Rivera. Built with HTML &amp; CSS, hosted on GitHub Pages.</p>
+</footer>
+
+</body>
+</html>
