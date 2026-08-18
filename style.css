@@ -444,12 +444,15 @@ code {
 }
 
 .toc nav a {
+  display: block;
+  width: 100%;
   color: var(--text-dim);
   font-size: 0.86rem;
   line-height: 1.4;
   padding: 7px 0 7px 16px;
   border-left: 2px solid transparent;
   margin-left: -1px;
+  box-sizing: border-box;
 }
 
 .toc nav a:hover { color: var(--text); text-decoration: none; }
